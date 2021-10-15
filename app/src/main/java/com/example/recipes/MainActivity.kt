@@ -1,4 +1,4 @@
-package com.example.recepies
+package com.example.recipes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
