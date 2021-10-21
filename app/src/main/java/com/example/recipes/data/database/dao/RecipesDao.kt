@@ -19,10 +19,10 @@ interface RecipesDao {
      * Replace recipes every time we reload data from API to ensure that we have the actual version of a recipe
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRecipes(recipes: List<RecipeEntity>): Long
+    fun insertRecipes(recipes: List<RecipeEntity>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertFavInfo(favInfo: List<FavouriteRecipeEntity>): Long
+    fun insertFavInfo(favInfo: List<FavouriteRecipeEntity>)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateFavInfo(favInfo: FavouriteRecipeEntity)
