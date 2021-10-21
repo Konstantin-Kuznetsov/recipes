@@ -7,4 +7,8 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "recipes"
+
 include ':app'
+include ':core'
+include ':feed'
+include ':details'
