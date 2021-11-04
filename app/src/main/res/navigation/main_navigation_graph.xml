@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/recipesListFragment"
-        android:name="com.example.feed.ui.RecipesListFragment"
+        android:name="com.example.feed.presentation.RecipesListFragment"
         android:label="RecipesListFragment" />
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.feed.ui
+package com.example.feed.presentation
 
 import android.os.Bundle
 import android.view.View
