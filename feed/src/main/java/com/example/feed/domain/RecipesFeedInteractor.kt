@@ -7,18 +7,21 @@ import com.example.feed.domain.model.CacheDataResult
 import com.example.feed.domain.model.FeedDataResult
 import com.example.feed.domain.model.RecipesFeedData
 import com.example.feed.domain.model.RemoteUpdateDataResult
-import com.example.feed.domain.repo.RecipesRepo
+import com.example.feed.domain.repo.RecipesFeedRepo
 import timber.log.Timber
 import javax.inject.Inject
-
-interface RecipesListInteractor {
+/*
+    suspend fun updateRecipes() can be useful in cases when we need to update recipes without UI interactions (from service?).
+    Otherwise, this function should be private.
+ */
+interface RecipesFeedInteractor {
     suspend fun getRecipes(): FeedDataResult
     suspend fun updateRecipes(): RemoteUpdateDataResult
 }
 
-class NotificationsListImpl @Inject constructor(
-    private val recipesRepo: RecipesRepo
-) : RecipesListInteractor {
+class RecipesFeedInteractorImpl @Inject constructor(
+    private val recipesFeedRepo: RecipesFeedRepo
+) : RecipesFeedInteractor {
 
     override suspend fun getRecipes(): FeedDataResult {
         val updateResult = updateRecipes()
@@ -37,7 +40,7 @@ class NotificationsListImpl @Inject constructor(
     }
 
     override suspend fun updateRecipes(): RemoteUpdateDataResult =
-        recipesRepo.updateRecipesRemotely().also { result ->
+        recipesFeedRepo.updateRecipesRemotely().also { result ->
             (result as? RecipesResult.Data)
                 ?.let {
                     Timber.d("${it.value.recipes.size} recipes were updated successfully")
@@ -47,5 +50,5 @@ class NotificationsListImpl @Inject constructor(
             }
         }
 
-    private suspend fun getCachedRecipes(): CacheDataResult = recipesRepo.getCachedRecipes()
+    private suspend fun getCachedRecipes(): CacheDataResult = recipesFeedRepo.getCachedRecipes()
 }

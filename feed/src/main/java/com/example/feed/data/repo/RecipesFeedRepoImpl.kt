@@ -6,17 +6,17 @@ import com.example.core.data.database.entities.RecipeEntity
 import com.example.core.data.mapper.ApiResponseErrorMapper
 import com.example.core.data.model.RecipesError
 import com.example.core.data.model.RecipesResult
-import com.example.feed.data.mapper.RecipeMapper
+import com.example.core.data.mapper.RecipeMapper
 import com.example.feed.domain.model.*
-import com.example.feed.domain.repo.RecipesRepo
+import com.example.feed.domain.repo.RecipesFeedRepo
 import javax.inject.Inject
 
-class RecipesRepoImpl @Inject constructor(
+class RecipesFeedRepoImpl @Inject constructor(
     private val api: RecipesApi,
     private val cache: RecipesDao,
     private val mapper: RecipeMapper,
     private val errMapper: ApiResponseErrorMapper
-) : RecipesRepo {
+) : RecipesFeedRepo {
 
     override suspend fun updateRecipesRemotely(): RemoteUpdateDataResult =
         runCatching {
