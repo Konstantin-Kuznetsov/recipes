@@ -2,6 +2,8 @@ package com.example.core.di
 
 import android.content.Context
 import com.example.core.data.api.RecipesApi
+import com.example.core.data.mapper.ApiResponseErrorMapper
+import com.example.core.data.mapper.ApiResponseErrorMapperImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -27,6 +29,9 @@ class NetworkModule {
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
             .build()
+
+    @Provides
+    fun provideResponseErrorMapper(): ApiResponseErrorMapper = ApiResponseErrorMapperImpl()
 
     private fun createRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
         Retrofit.Builder()
