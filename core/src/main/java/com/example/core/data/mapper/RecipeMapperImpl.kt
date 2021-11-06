@@ -1,4 +1,4 @@
-package com.example.feed.data.mapper
+package com.example.core.data.mapper
 
 import com.example.core.data.database.entities.FullRecipeInfo
 import com.example.core.data.database.entities.RecipeEntity
