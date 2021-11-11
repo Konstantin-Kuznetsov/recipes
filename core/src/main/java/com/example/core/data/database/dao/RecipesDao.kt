@@ -16,7 +16,7 @@ interface RecipesDao {
     suspend fun getAllRecipes(): List<FullRecipeInfo>
 
     @Transaction
-    open fun insertOrUpdateRecipesWithFavInfo(updatedRecipes: List<RecipeEntity>) {
+    fun insertOrUpdateRecipesWithFavInfo(updatedRecipes: List<RecipeEntity>) {
         insertRecipes(updatedRecipes)
         updatedRecipes.map {
             FavouriteRecipeEntity(

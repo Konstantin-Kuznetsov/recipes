@@ -16,7 +16,9 @@ import javax.inject.Inject
  */
 interface RecipesFeedInteractor {
     suspend fun getRecipes(): FeedDataResult
+    suspend fun reloadCachedResults(): FeedDataResult
     suspend fun updateRecipes(): RemoteUpdateDataResult
+    suspend fun updateIsFavouriteStatus(recipeId: String, newStatus: Boolean): Boolean
 }
 
 class RecipesFeedInteractorImpl @Inject constructor(
@@ -32,12 +34,24 @@ class RecipesFeedInteractorImpl @Inject constructor(
                 RecipesResult.Data(
                     RecipesFeedData(
                         recipes = cacheDataResult.value,
-                        dataSource = if (updateResult is RecipesError) DataSourceType.Cache else DataSourceType.Remote,
+                        dataSource = if (updateResult is RecipesError) DataSourceType.CacheAfterError else DataSourceType.Remote,
                         remoteUpdateError = updateResult as? RecipesError
                     )
                 )
         }
     }
+
+    override suspend fun reloadCachedResults(): FeedDataResult =
+        when (val cacheDataResult = getCachedRecipes()) {
+            is RecipesResult.Error -> RecipesResult.Error(cacheDataResult.error)
+            is RecipesResult.Data ->
+                RecipesResult.Data(
+                    RecipesFeedData(
+                        recipes = cacheDataResult.value,
+                        dataSource = DataSourceType.CacheAfterLocalUpdate
+                    )
+                )
+        }
 
     override suspend fun updateRecipes(): RemoteUpdateDataResult =
         recipesFeedRepo.updateRecipesRemotely().also { result ->
@@ -49,6 +63,9 @@ class RecipesFeedInteractorImpl @Inject constructor(
                 Timber.e("$err occurred while updating recipes data remotely")
             }
         }
+
+    override suspend fun updateIsFavouriteStatus(recipeId: String, newStatus: Boolean): Boolean =
+        recipesFeedRepo.updateIsFavouriteStatus(recipeId, newStatus)
 
     private suspend fun getCachedRecipes(): CacheDataResult = recipesFeedRepo.getCachedRecipes()
 }

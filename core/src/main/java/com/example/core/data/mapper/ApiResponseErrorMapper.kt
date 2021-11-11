@@ -13,7 +13,7 @@ class ApiResponseErrorMapperImpl @Inject constructor() : ApiResponseErrorMapper 
     override fun map(err: Throwable): RecipesError =
         when {
             err is UnknownHostException -> RecipesError.NoInternetError
-            (err as? HttpException)?.code() != 200 -> RecipesError.ApiError
+            (err as? HttpException)?.let { it.code() != 200 } ?: false -> RecipesError.ApiError
             else -> RecipesError.UnknownError(err)
         }
 }

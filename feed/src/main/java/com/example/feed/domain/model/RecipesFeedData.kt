@@ -7,5 +7,5 @@ import com.example.core.domain.model.RecipeItem
 data class RecipesFeedData(
     val recipes: List<RecipeItem>,
     val dataSource: DataSourceType,
-    val remoteUpdateError: RecipesError?
+    val remoteUpdateError: RecipesError? = null
 )

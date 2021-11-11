@@ -11,6 +11,7 @@ import com.example.feed.R
 import com.example.feed.databinding.FragmentRecipesListBinding
 import com.example.feed.di.DaggerRecipesFeedComponent
 import com.example.feed.di.RecipesFeedModule
+import com.example.feed.domain.state.RecipesListEffect
 import com.example.feed.domain.state.RecipesListState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -26,6 +27,13 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         get() = requireNotNull(_viewBinding)
 
     private var _viewBinding: FragmentRecipesListBinding? = null
+
+    private val recipesAdapter by lazy {
+        RecipesListAdapter(
+            ::onRecipeItemClick,
+            viewModel::onFavouriteIconClick
+        )
+    }
 
     override fun onAttach(context: Context) {
         DaggerRecipesFeedComponent
@@ -48,8 +56,19 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         super.onViewCreated(view, savedInstanceState)
         _viewBinding = FragmentRecipesListBinding.bind(view)
 
+        with(binding) {
+            rvRecipes.adapter = recipesAdapter
+
+            srlRecipesList.setOnRefreshListener {
+                lifecycleScope.launch {
+                    viewModel.loadRecipes()
+                }
+            }
+        }
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.recipesState.collect (::renderState)
+            viewModel.effects.collect(::handleEffect)
         }
     }
 
@@ -57,25 +76,37 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         when(state) {
             RecipesListState.Loading -> {
                 // todo
+                binding.srlRecipesList.isRefreshing = false
             }
             is RecipesListState.Data -> {
                 // todo
+                binding.srlRecipesList.isRefreshing = false
+                recipesAdapter.updateRecipesData(state.screenState.recipes)
             }
             is RecipesListState.Error -> {
                 // todo
+                binding.srlRecipesList.isRefreshing = false
             }
         }
     }
 
-    private fun showLoading() {
+    private fun handleEffect(effect: RecipesListEffect) {
+        // todo show toast
+    }
 
+    private fun showLoading() {
+        // todo fullscreen loader
     }
 
     private fun showErrorScreen() {
-
+        // TODO Not yet implemented
     }
 
     private fun showRecipesData() {
+        // TODO Not yet implemented
+    }
 
+    private fun onRecipeItemClick(recipeId: String) {
+        // TODO Not yet implemented
     }
 }

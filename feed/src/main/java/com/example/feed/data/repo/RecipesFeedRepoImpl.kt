@@ -2,6 +2,7 @@ package com.example.feed.data.repo
 
 import com.example.core.data.api.RecipesApi
 import com.example.core.data.database.dao.RecipesDao
+import com.example.core.data.database.entities.FavouriteRecipeEntity
 import com.example.core.data.database.entities.RecipeEntity
 import com.example.core.data.mapper.ApiResponseErrorMapper
 import com.example.core.data.model.RecipesError
@@ -9,6 +10,7 @@ import com.example.core.data.model.RecipesResult
 import com.example.core.data.mapper.RecipeMapper
 import com.example.feed.domain.model.*
 import com.example.feed.domain.repo.RecipesFeedRepo
+import timber.log.Timber
 import javax.inject.Inject
 
 class RecipesFeedRepoImpl @Inject constructor(
@@ -35,6 +37,23 @@ class RecipesFeedRepoImpl @Inject constructor(
         }.fold(
             onSuccess = { RecipesResult.Data(it) },
             onFailure = { RecipesResult.Error(RecipesError.CacheError(it)) }
+        )
+
+    override suspend fun updateIsFavouriteStatus(recipId: String, newStatus: Boolean): Boolean =
+        runCatching {
+            cache.updateFavInfo(
+                FavouriteRecipeEntity(
+                    recipeId = recipId,
+                    isFavourite = newStatus,
+                    lastUpdateMillis = System.currentTimeMillis()
+                )
+            )
+        }.fold(
+            onSuccess = { true },
+            onFailure = {
+                Timber.e("Updateing IsFavourite status error for ercipeId $recipId: " + it.message)
+                false
+            }
         )
 
     private fun saveRecipesToCache(recipes: List<RecipeEntity>) {

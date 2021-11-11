@@ -6,4 +6,5 @@ import com.example.feed.domain.model.RemoteUpdateDataResult
 interface RecipesFeedRepo {
     suspend fun updateRecipesRemotely(): RemoteUpdateDataResult
     suspend fun getCachedRecipes(): CacheDataResult
+    suspend fun updateIsFavouriteStatus(recipId: String, newStatus: Boolean): Boolean
 }

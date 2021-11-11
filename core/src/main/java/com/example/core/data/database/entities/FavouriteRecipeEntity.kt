@@ -4,13 +4,6 @@ import androidx.room.*
 
 @Entity(
     tableName = "favourites",
-    foreignKeys = [
-        ForeignKey(
-            entity = RecipeEntity::class,
-            parentColumns = ["recipe_id"],
-            childColumns = ["recipe_id"],
-            onDelete = ForeignKey.CASCADE
-        )],
     indices = [Index(value = ["recipe_id"], unique = true)]
 )
 data class FavouriteRecipeEntity(
