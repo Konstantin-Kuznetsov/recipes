@@ -39,11 +39,11 @@ class RecipesFeedRepoImpl @Inject constructor(
             onFailure = { RecipesResult.Error(RecipesError.CacheError(it)) }
         )
 
-    override suspend fun updateIsFavouriteStatus(recipId: String, newStatus: Boolean): Boolean =
+    override suspend fun updateIsFavouriteStatus(recipeId: String, newStatus: Boolean): Boolean =
         runCatching {
             cache.updateFavInfo(
                 FavouriteRecipeEntity(
-                    recipeId = recipId,
+                    recipeId = recipeId,
                     isFavourite = newStatus,
                     lastUpdateMillis = System.currentTimeMillis()
                 )
@@ -51,7 +51,7 @@ class RecipesFeedRepoImpl @Inject constructor(
         }.fold(
             onSuccess = { true },
             onFailure = {
-                Timber.e("Updateing IsFavourite status error for ercipeId $recipId: " + it.message)
+                Timber.e("Updating IsFavourite status error for recipeId $recipeId: " + it.message)
                 false
             }
         )
