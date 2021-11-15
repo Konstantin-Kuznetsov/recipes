@@ -39,6 +39,7 @@ dependencies {
 
     implementation project(':feed')
     implementation project(':details')
+    implementation project(':core')
 
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation 'androidx.core:core-ktx:1.6.0'

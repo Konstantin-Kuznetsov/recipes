@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.core.AppNavigator
 import com.example.core.app.RecipesApp
 import com.example.feed.R
 import com.example.feed.databinding.FragmentRecipesListBinding
@@ -107,6 +108,6 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     }
 
     private fun onRecipeItemClick(recipeId: String) {
-        // TODO Not yet implemented
+        (requireActivity() as? AppNavigator)?.toDetails(recipeId)
     }
 }

@@ -16,6 +16,10 @@ interface RecipesDao {
     suspend fun getAllRecipes(): List<FullRecipeInfo>
 
     @Transaction
+    @Query("SELECT * FROM recipes WHERE recipe_id = :recipeId")
+    suspend fun getRecipeById(recipeId: String): FullRecipeInfo
+
+    @Transaction
     fun insertOrUpdateRecipesWithFavInfo(updatedRecipes: List<RecipeEntity>) {
         insertRecipes(updatedRecipes)
         updatedRecipes.map {
