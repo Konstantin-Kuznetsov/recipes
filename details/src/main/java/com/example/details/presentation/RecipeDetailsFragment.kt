@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.core.app.RecipesApp
 import com.example.details.R
 import com.example.details.databinding.FragmentRecipeDetailsBinding
@@ -42,6 +43,7 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // safe args are not implemented in this project, so we simply use the bundle
         arguments?.let {
             lifecycleScope.launch {
                 viewModel.loadRecipe(arguments?.getString("RECIPE_ID").orEmpty())
@@ -64,9 +66,7 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
             RecipeDetailsState.Loading -> {
                 // todo
             }
-            is RecipeDetailsState.Data -> {
-                // todo
-            }
+            is RecipeDetailsState.Data -> showData(state)
             is RecipeDetailsState.Error -> {
                 // todo
             }
@@ -75,6 +75,27 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
 
     private fun handleEffect(effect: RecipeDetailsEffect) {
         // todo show toast
+    }
+
+    private fun showData(state: RecipeDetailsState.Data) {
+        with(binding) {
+            Glide.with(ivRecipeFull.context)
+                .load(state.screenState.fullImageUrl)
+                .into(ivRecipeFull)
+
+            collapsingToolbar.title = state.screenState.name
+            binding.contentScrolling.tvRecipeDescription.text = state.screenState.description
+
+            fabIsFavourite.setImageResource(
+                if (state.screenState.isFavourite) {
+                    R.drawable.ic_favorite_black_24dp
+                } else {
+                    R.drawable.ic_favorite_border_black_24dp
+                }
+            )
+
+            fabIsFavourite.setOnClickListener { viewModel.onFavouriteIconClick(state.screenState.recipeId, !state.screenState.isFavourite) }
+        }
     }
 
     private fun showLoading() {
