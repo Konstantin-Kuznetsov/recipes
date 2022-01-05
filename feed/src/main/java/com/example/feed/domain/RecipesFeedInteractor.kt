@@ -34,7 +34,7 @@ class RecipesFeedInteractorImpl @Inject constructor(
                 RecipesResult.Data(
                     RecipesFeedData(
                         recipes = cacheDataResult.value,
-                        dataSource = if (updateResult is RecipesError) DataSourceType.CacheAfterError else DataSourceType.Remote,
+                        dataSource = if (updateResult is RecipesResult.Error) DataSourceType.CacheAfterError else DataSourceType.Remote,
                         remoteUpdateError = updateResult as? RecipesError
                     )
                 )
