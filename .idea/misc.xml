@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-w936dp/content_scrolling.xml" value="0.11319444444444444" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_scrolling.xml" value="0.1" />
+        <entry key="core/src/main/res/drawable/ic_favorite_black_24dp.xml" value="0.22135416666666666" />
+        <entry key="details/src/main/res/layout/content_scrolling.xml" value="0.15092592592592594" />
+        <entry key="details/src/main/res/layout/fragment_recipe_details.xml" value="0.1" />
         <entry key="feed/src/main/res/layout/fragment_recipes_list.xml" value="0.26252983293556087" />
       </map>
     </option>
