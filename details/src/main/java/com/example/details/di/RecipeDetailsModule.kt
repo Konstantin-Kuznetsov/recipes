@@ -6,8 +6,8 @@ import com.example.core.data.database.dao.RecipesDao
 import com.example.core.data.mapper.RecipeMapper
 import com.example.details.data.repo.RecipeDetailsRepoImpl
 import com.example.details.domain.repo.RecipeDetailsRepo
-import com.example.details.domain.state.RecipeDetailsInteractor
-import com.example.details.domain.state.RecipeDetailsInteractorImpl
+import com.example.details.presentation.state.RecipeDetailsInteractor
+import com.example.details.presentation.state.RecipeDetailsInteractorImpl
 import com.example.details.presentation.RecipeDetailsViewModel
 import dagger.Module
 import dagger.Provides

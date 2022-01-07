@@ -12,8 +12,8 @@ import com.example.details.R
 import com.example.details.databinding.FragmentRecipeDetailsBinding
 import com.example.details.di.DaggerRecipeDetailsComponent
 import com.example.details.di.RecipeDetailsModule
-import com.example.details.domain.state.RecipeDetailsEffect
-import com.example.details.domain.state.RecipeDetailsState
+import com.example.details.presentation.state.RecipeDetailsEffect
+import com.example.details.presentation.state.RecipeDetailsState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -59,6 +59,11 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
             viewModel.recipesState.collect { renderState(it) }
             viewModel.effects.collect(::handleEffect)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _viewBinding = null
     }
 
     private fun renderState(state: RecipeDetailsState) {

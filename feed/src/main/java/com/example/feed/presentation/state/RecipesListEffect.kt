@@ -1,4 +1,4 @@
-package com.example.feed.domain.state
+package com.example.feed.presentation.state
 
 sealed class RecipesListEffect {
     object ErrorUpdatingFavStatus: RecipesListEffect()

@@ -1,4 +1,4 @@
-package com.example.feed.domain.state
+package com.example.feed.presentation.state
 
 import com.example.core.data.model.RecipesError
 import com.example.feed.domain.model.RecipesFeedData

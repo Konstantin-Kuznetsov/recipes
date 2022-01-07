@@ -1,4 +1,4 @@
-package com.example.details.domain.state
+package com.example.details.presentation.state
 
 import com.example.core.data.model.RecipesError
 import com.example.core.domain.model.RecipeItem

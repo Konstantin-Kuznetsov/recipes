@@ -12,8 +12,8 @@ import com.example.feed.R
 import com.example.feed.databinding.FragmentRecipesListBinding
 import com.example.feed.di.DaggerRecipesFeedComponent
 import com.example.feed.di.RecipesFeedModule
-import com.example.feed.domain.state.RecipesListEffect
-import com.example.feed.domain.state.RecipesListState
+import com.example.feed.presentation.state.RecipesListEffect
+import com.example.feed.presentation.state.RecipesListState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -71,6 +71,11 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
             viewModel.recipesState.collect (::renderState)
             viewModel.effects.collect(::handleEffect)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _viewBinding = null
     }
 
     private fun renderState(state: RecipesListState) {

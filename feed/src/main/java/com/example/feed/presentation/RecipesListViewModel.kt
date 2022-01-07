@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.data.model.RecipesResult
 import com.example.feed.domain.RecipesFeedInteractor
-import com.example.feed.domain.state.RecipesListEffect
-import com.example.feed.domain.state.RecipesListState
+import com.example.feed.presentation.state.RecipesListEffect
+import com.example.feed.presentation.state.RecipesListState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

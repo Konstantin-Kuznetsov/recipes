@@ -1,4 +1,4 @@
-package com.example.details.domain.state
+package com.example.details.presentation.state
 
 import com.example.core.data.model.RecipesResult
 import com.example.details.domain.model.CachedRecipeResult

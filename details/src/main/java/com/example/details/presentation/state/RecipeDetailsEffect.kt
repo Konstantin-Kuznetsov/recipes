@@ -1,4 +1,4 @@
-package com.example.details.domain.state
+package com.example.details.presentation.state
 
 sealed class RecipeDetailsEffect {
     object ErrorUpdatingFavStatus: RecipeDetailsEffect()

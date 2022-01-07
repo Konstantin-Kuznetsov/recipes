@@ -3,9 +3,9 @@ package com.example.details.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.data.model.RecipesResult
-import com.example.details.domain.state.RecipeDetailsEffect
-import com.example.details.domain.state.RecipeDetailsInteractor
-import com.example.details.domain.state.RecipeDetailsState
+import com.example.details.presentation.state.RecipeDetailsEffect
+import com.example.details.presentation.state.RecipeDetailsInteractor
+import com.example.details.presentation.state.RecipeDetailsState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
