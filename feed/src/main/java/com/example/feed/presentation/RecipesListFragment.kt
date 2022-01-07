@@ -73,6 +73,11 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.reloadRecipesFromCache()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _viewBinding = null

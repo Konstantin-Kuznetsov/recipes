@@ -48,7 +48,7 @@ class RecipesListViewModel(
             }
         }
 
-    private fun reloadRecipesFromCache() {
+    fun reloadRecipesFromCache() {
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = interactor.reloadCachedResults()) {
                 is RecipesResult.Error ->
