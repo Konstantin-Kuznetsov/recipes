@@ -68,13 +68,9 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
 
     private fun renderState(state: RecipeDetailsState) {
         when(state) {
-            RecipeDetailsState.Loading -> {
-                // todo
-            }
+            RecipeDetailsState.Loading -> showLoading()
             is RecipeDetailsState.Data -> showData(state)
-            is RecipeDetailsState.Error -> {
-                // todo
-            }
+            is RecipeDetailsState.Error -> showErrorScreen()
         }
     }
 
@@ -99,7 +95,12 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
                 }
             )
 
-            fabIsFavourite.setOnClickListener { viewModel.onFavouriteIconClick(state.screenState.recipeId, !state.screenState.isFavourite) }
+            fabIsFavourite.setOnClickListener {
+                viewModel.onFavouriteIconClick(
+                    state.screenState.recipeId,
+                    !state.screenState.isFavourite
+                )
+            }
         }
     }
 
