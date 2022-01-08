@@ -93,9 +93,9 @@ class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
 
             fabIsFavourite.setImageResource(
                 if (state.screenState.isFavourite) {
-                    R.drawable.ic_favorite_black_24dp
+                    R.drawable.ic_favorited_red
                 } else {
-                    R.drawable.ic_favorite_border_black_24dp
+                    R.drawable.ic_not_favourited_border_black
                 }
             )
 

@@ -81,9 +81,9 @@ class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             tvRecipeHeader.text = recipe.name
             tvRecipeDescription.text = recipe.headline
             ivFavourite.background = if (recipe.isFavourite) {
-                ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_black_24dp)
+                ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorited_red)
             } else {
-                ContextCompat.getDrawable(itemView.context, R.drawable.ic_favorite_border_black_24dp)
+                ContextCompat.getDrawable(itemView.context, R.drawable.ic_not_favourited_border_black)
             }
             ivFavourite.setOnClickListener { isFavouriteClickListener(recipe.recipeId, !recipe.isFavourite) }
         }

@@ -8,9 +8,12 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_scrolling.xml" value="0.1" />
         <entry key="core/src/main/res/drawable/ic_favorite_black_24dp.xml" value="0.22135416666666666" />
+        <entry key="core/src/main/res/drawable/ic_favorite_border_black_24dp.xml" value="0.26927083333333335" />
+        <entry key="core/src/main/res/drawable/ic_not_favourited_border_black.xml" value="0.215625" />
         <entry key="details/src/main/res/layout/content_scrolling.xml" value="0.15092592592592594" />
-        <entry key="details/src/main/res/layout/fragment_recipe_details.xml" value="0.1" />
+        <entry key="details/src/main/res/layout/fragment_recipe_details.xml" value="0.165" />
         <entry key="feed/src/main/res/layout/fragment_recipes_list.xml" value="0.26252983293556087" />
+        <entry key="feed/src/main/res/layout/item_recipe.xml" value="0.24814814814814815" />
       </map>
     </option>
   </component>
