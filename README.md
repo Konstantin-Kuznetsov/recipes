@@ -1,8 +1,16 @@
 # recipes
 
+https://user-images.githubusercontent.com/18750579/148676220-460076df-8d82-4100-8b17-358388d94c2c.mp4
+
+
 Definition of this test task was taken from here https://github.com/mrabelwahed/HelloFresh-Challenge
 I'm not sure that this is the actual test task in this company but it's very typical challenge so I decided to use API with data from that page. 
 One screen with list of items and another one with details. Additional feature in the test task - a recipe can be favorited or unfavorited on details screen.
+
+**Libraries**
+----------
+
+Room, Navigation, Retrofit, Dagger2, Coroutines, Gson, Glide, Swiperefreshlayout, Espresso, Mockito
 
 **Gradle**
 ----------
