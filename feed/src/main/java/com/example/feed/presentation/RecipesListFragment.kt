@@ -68,7 +68,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.recipesState.collect (::renderState)
+            viewModel.recipesState.collect(::renderState)
             viewModel.effects.collect(::handleEffect)
         }
     }
