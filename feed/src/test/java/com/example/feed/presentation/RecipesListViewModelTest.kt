@@ -32,10 +32,6 @@ class RecipesListViewModelTest {
         viewModel = RecipesListViewModel(interactor)
     }
 
-    @After
-    fun tearDown() {
-    }
-
     @Test
     fun loadRecipesNonEmptyResult() {
         runTest {
