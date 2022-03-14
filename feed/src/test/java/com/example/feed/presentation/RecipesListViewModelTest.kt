@@ -1,5 +1,6 @@
 package com.example.feed.presentation
 
+import app.cash.turbine.test
 import com.example.core.data.model.RecipesError
 import com.example.core.data.model.RecipesResult
 import com.example.core.domain.model.DataSourceType
@@ -9,7 +10,6 @@ import com.example.feed.domain.model.RecipesFeedData
 import com.example.feed.presentation.state.RecipesListState
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -43,28 +43,45 @@ class RecipesListViewModelTest {
             // non empty result for updating from API
             whenever(interactor.getRecipes()).thenReturn(nonEmptyResult)
 
-            val states = viewModel.recipesState.test(scope = this)
+            viewModel.recipesState.test {
+                viewModel.loadRecipes()
 
-            // initial state
-            assertEquals(viewModel.recipesState.value, RecipesListState.Loading)
+                // initial state
+                assertEquals(RecipesListState.Loading, awaitItem())
 
-            viewModel.loadRecipes()
-
-            delay(500)
-
-            // state after data successfully loaded
-            assertEquals(
-                viewModel.recipesState.value, RecipesListState.Data(
-                    RecipesFeedData(
-                        recipes = nonEmptyDomainRecipes,
-                        dataSource = DataSourceType.Remote,
-                        remoteUpdateError = null
-                    )
+                // state with recipes data
+                assertEquals(
+                    RecipesListState.Data(
+                        RecipesFeedData(
+                            recipes = nonEmptyDomainRecipes,
+                            dataSource = DataSourceType.Remote,
+                            remoteUpdateError = null
+                        )
+                    ), awaitItem()
                 )
-            )
+                cancel()
+            }
+        }
+    }
 
-            // finishing all the jobs
-            states.finish()
+    @Test
+    fun loadRecipesExceptionCase() {
+        runTest {
+
+            // exception during retrieving data from API
+            whenever(interactor.getRecipes()).thenReturn(apiExceptionResult)
+
+            viewModel.recipesState.test {
+                viewModel.loadRecipes()
+
+                // initial state
+                assertEquals(RecipesListState.Loading, awaitItem())
+
+                // state with exception
+                assert((awaitItem() as RecipesListState.Error).err is RecipesError.NoInternetError)
+
+                cancel()
+            }
         }
     }
 
@@ -86,5 +103,9 @@ class RecipesListViewModelTest {
             dataSource = DataSourceType.Remote,
             remoteUpdateError = null
         )
+    )
+
+    private val apiExceptionResult = RecipesResult.Error<RecipesFeedData, RecipesError>(
+        error = RecipesError.NoInternetError
     )
 }

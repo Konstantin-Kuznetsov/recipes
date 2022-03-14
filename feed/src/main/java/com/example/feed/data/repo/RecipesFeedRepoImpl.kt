@@ -24,7 +24,7 @@ class RecipesFeedRepoImpl @Inject constructor(
         runCatching {
             api.loadRecipes()
                 .map(mapper::mapResponseToCache)
-                .also(this::saveRecipesToCache)
+                .also(this::saveRecipesToCache) // caching for every success update
         }.fold(
             onSuccess = { RecipesResult.Data(RecipesUpdateData(it)) },
             onFailure = { RecipesResult.Error(errMapper.map(it)) }
