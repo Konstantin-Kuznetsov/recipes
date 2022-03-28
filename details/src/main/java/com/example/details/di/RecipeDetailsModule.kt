@@ -9,21 +9,21 @@ import com.example.details.domain.RecipeDetailsInteractorImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
-import dagger.hilt.android.scopes.FragmentScoped
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-@InstallIn(FragmentComponent::class)
+@InstallIn(ViewModelComponent::class)
 class RecipeDetailsModule {
 
     @Provides
-    @FragmentScoped
+    @ViewModelScoped
     fun provideRecipeDetailsInteractor(
         detailsRepo: RecipeDetailsRepo
     ): RecipeDetailsInteractor = RecipeDetailsInteractorImpl(detailsRepo)
 
     @Provides
-    @FragmentScoped
+    @ViewModelScoped
     fun provideRecipeDetailsRepo(
         cache: RecipesDao,
         mapper: RecipeMapper

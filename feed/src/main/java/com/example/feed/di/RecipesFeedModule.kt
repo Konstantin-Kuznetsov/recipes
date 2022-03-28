@@ -7,18 +7,18 @@ import com.example.feed.domain.repo.RecipesFeedRepo
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
-import dagger.hilt.android.scopes.FragmentScoped
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-@InstallIn(FragmentComponent::class)
+@InstallIn(ViewModelComponent::class)
 abstract class RecipesFeedModule {
 
     @Binds
-    @FragmentScoped
+    @ViewModelScoped
     abstract fun provideRecipesFeedInteractor(impl: RecipesFeedInteractorImpl): RecipesFeedInteractor
 
     @Binds
-    @FragmentScoped
+    @ViewModelScoped
     abstract fun provideRecipesFeedRepo(impl: RecipesFeedRepoImpl): RecipesFeedRepo
 }

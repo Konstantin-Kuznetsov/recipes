@@ -6,6 +6,7 @@ import com.example.core.data.model.RecipesResult
 import com.example.feed.domain.RecipesFeedInteractor
 import com.example.feed.presentation.state.RecipesListEffect
 import com.example.feed.presentation.state.RecipesListState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class RecipesListViewModel @Inject constructor(
     private val interactor: RecipesFeedInteractor
 ) : ViewModel() {

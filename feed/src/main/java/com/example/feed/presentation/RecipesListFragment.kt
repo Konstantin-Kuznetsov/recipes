@@ -3,6 +3,7 @@ package com.example.feed.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.core.AppNavigator
 import com.example.feed.R
@@ -12,13 +13,11 @@ import com.example.feed.presentation.state.RecipesListState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
 
-    @Inject
-    lateinit var viewModel: RecipesListViewModel
+    private val viewModel by viewModels<RecipesListViewModel>()
 
     private val binding: FragmentRecipesListBinding
         get() = requireNotNull(_viewBinding)
