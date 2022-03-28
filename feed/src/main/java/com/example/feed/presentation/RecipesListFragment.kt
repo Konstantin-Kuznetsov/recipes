@@ -1,28 +1,24 @@
 package com.example.feed.presentation
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.core.AppNavigator
-import com.example.core.app.RecipesApp
 import com.example.feed.R
 import com.example.feed.databinding.FragmentRecipesListBinding
-import com.example.feed.di.DaggerRecipesFeedComponent
-import com.example.feed.di.RecipesFeedModule
 import com.example.feed.presentation.state.RecipesListEffect
 import com.example.feed.presentation.state.RecipesListState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
 
     @Inject
-    lateinit var vmFactory: RecipesFeedModule.RecipesListViewModelFactory
-    private val viewModel by viewModels<RecipesListViewModel> { vmFactory }
+    lateinit var viewModel: RecipesListViewModel
 
     private val binding: FragmentRecipesListBinding
         get() = requireNotNull(_viewBinding)
@@ -34,16 +30,6 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
             ::onRecipeItemClick,
             viewModel::onFavouriteIconClick
         )
-    }
-
-    override fun onAttach(context: Context) {
-        DaggerRecipesFeedComponent
-            .builder()
-            .coreComponent(RecipesApp.coreComponent)
-            .recipesFeedModule(RecipesFeedModule())
-            .build()
-            .inject(this)
-        super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

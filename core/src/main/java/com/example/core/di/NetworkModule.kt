@@ -1,11 +1,12 @@
 package com.example.core.di
 
-import android.content.Context
 import com.example.core.data.api.RecipesApi
 import com.example.core.data.mapper.ApiResponseErrorMapper
 import com.example.core.data.mapper.ApiResponseErrorMapperImpl
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,6 +16,7 @@ private const val BASE_RECIPES_URL = "https://hf-android-app.s3-eu-west-1.amazon
 private const val TIMEOUT = 60L
 
 @Module
+@InstallIn(SingletonComponent::class)
 class NetworkModule {
 
     @Provides
@@ -23,7 +25,7 @@ class NetworkModule {
             .create(RecipesApi::class.java)
 
     @Provides
-    fun provideOkHttpClient(context: Context): OkHttpClient =
+    fun provideOkHttpClient(): OkHttpClient =
         OkHttpClient.Builder()
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)

@@ -11,7 +11,6 @@ import com.example.feed.presentation.state.RecipesListState
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
