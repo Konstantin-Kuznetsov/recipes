@@ -5,6 +5,7 @@ import com.example.core.data.model.RecipesError
 import com.example.core.data.model.RecipesResult
 import com.example.core.domain.model.DataSourceType
 import com.example.core.domain.model.RecipeItem
+import com.example.core.domain.model.RecipesPagingSource
 import com.example.feed.domain.RecipesFeedInteractor
 import com.example.feed.domain.model.RecipesFeedData
 import com.example.feed.presentation.state.RecipesListState
@@ -23,12 +24,15 @@ class RecipesListViewModelTest {
     @Mock
     private lateinit var interactor: RecipesFeedInteractor
 
+    @Mock
+    private lateinit var pagingSource: RecipesPagingSource
+
     private lateinit var viewModel: RecipesListViewModel
 
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this).close()
-        viewModel = RecipesListViewModel(interactor)
+        viewModel = RecipesListViewModel(interactor, pagingSource)
     }
 
     @Test
