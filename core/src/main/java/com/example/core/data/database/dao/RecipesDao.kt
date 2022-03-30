@@ -1,5 +1,6 @@
 package com.example.core.data.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.example.core.data.database.entities.FavouriteRecipeEntity
 import com.example.core.data.database.entities.FullRecipeInfo
@@ -14,6 +15,10 @@ interface RecipesDao {
     @Transaction
     @Query("SELECT * FROM recipes")
     suspend fun getAllRecipes(): List<FullRecipeInfo>
+
+    @Transaction
+    @Query("SELECT * FROM recipes")
+    fun getAllRecipesPaging(): PagingSource<Int, FullRecipeInfo>
 
     @Transaction
     @Query("SELECT * FROM recipes WHERE recipe_id = :recipeId")

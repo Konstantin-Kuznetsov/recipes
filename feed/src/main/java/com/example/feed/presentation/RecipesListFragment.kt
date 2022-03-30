@@ -12,6 +12,7 @@ import com.example.feed.presentation.state.RecipesListEffect
 import com.example.feed.presentation.state.RecipesListState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -25,7 +26,7 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     private var _viewBinding: FragmentRecipesListBinding? = null
 
     private val recipesAdapter by lazy {
-        RecipesListAdapter(
+        RecipesListPagingAdapter(
             ::onRecipeItemClick,
             viewModel::onFavouriteIconClick
         )
@@ -34,7 +35,9 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launch {
-            viewModel.loadRecipes()
+            viewModel.fetchRecipes().collectLatest { pagingData ->
+                recipesAdapter.submitData(pagingData)
+            }
         }
     }
 
@@ -77,7 +80,8 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
             is RecipesListState.Data -> {
                 // todo
                 binding.srlRecipesList.isRefreshing = false
-                recipesAdapter.updateRecipesData(state.screenState.recipes)
+                // adapter without paging here
+                //recipesAdapter.updateRecipesData(state.screenState.recipes)
             }
             is RecipesListState.Error -> {
                 // todo
