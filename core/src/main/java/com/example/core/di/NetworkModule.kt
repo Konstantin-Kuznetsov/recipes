@@ -1,5 +1,6 @@
 package com.example.core.di
 
+import com.example.core.data.api.BaseUrlProvider
 import com.example.core.data.api.RecipesApi
 import com.example.core.data.mapper.ApiResponseErrorMapper
 import com.example.core.data.mapper.ApiResponseErrorMapperImpl
@@ -12,7 +13,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-private const val BASE_RECIPES_URL = "https://hf-android-app.s3-eu-west-1.amazonaws.com/android-test/"
 private const val TIMEOUT = 60L
 
 @Module
@@ -20,8 +20,11 @@ private const val TIMEOUT = 60L
 class NetworkModule {
 
     @Provides
-    fun provideApi(client: OkHttpClient): RecipesApi =
-        createRetrofit(client, BASE_RECIPES_URL)
+    fun provideApi(
+        client: OkHttpClient,
+        urlProvider: BaseUrlProvider
+    ): RecipesApi =
+        createRetrofit(client, urlProvider.recipesBaseUrl)
             .create(RecipesApi::class.java)
 
     @Provides

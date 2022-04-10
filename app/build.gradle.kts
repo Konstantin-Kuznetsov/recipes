@@ -14,7 +14,7 @@ android {
         targetSdkVersion(Versions.targetSdkVersion)
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.recipes.HiltUiTestRunner"
 
         kapt {
             correctErrorTypes = true
@@ -70,6 +70,8 @@ dependencies {
 
     // DI
     implementation("com.google.dagger:hilt-android:${Versions.DAGGER_VERSION}")
+    implementation("com.google.dagger:hilt-android-testing:${Versions.DAGGER_VERSION}")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:${Versions.DAGGER_VERSION}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.DAGGER_VERSION}")
 
     // navigation
@@ -94,11 +96,14 @@ dependencies {
     implementation("com.google.code.gson:gson:${Versions.GSON_VERSION}")
 
     // Test
+    implementation("androidx.test:runner:1.4.0")
+    implementation("androidx.test:core:1.4.0")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.assertj:assertj-core:3.8.0")
-    androidTestImplementation("androidx.test:core:1.4.0")
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.4.0")
+    androidTestImplementation("androidx.test:rules:1.4.0")
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.3.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     androidTestImplementation("android.arch.core:core-testing:1.1.1")
 }

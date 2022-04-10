@@ -11,8 +11,6 @@ android {
     defaultConfig {
         minSdkVersion(Versions.minSdk)
         targetSdkVersion(Versions.targetSdkVersion)
-        versionCode = 1
-        versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         kapt {
@@ -74,8 +72,8 @@ dependencies {
     kapt("com.github.bumptech.glide:compiler:4.12.0")
 
     // Navigation
-    implementation("android.arch.navigation:navigation-fragment-ktx:${Versions.NAV_VERSION}")
-    implementation("android.arch.navigation:navigation-ui-ktx:${Versions.NAV_VERSION}")
+    implementation("androidx.navigation:navigation-fragment-ktx:${Versions.NAV_VERSION}")
+    implementation("androidx.navigation:navigation-ui-ktx:${Versions.NAV_VERSION}")
 
     //Paging
     implementation("androidx.paging:paging-runtime-ktx:${Versions.PAGING_VERSION}")
@@ -87,8 +85,8 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.assertj:assertj-core:3.8.0")
     androidTestImplementation("androidx.test:core:1.4.0")
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.4.0")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.3.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     androidTestImplementation("android.arch.core:core-testing:1.1.1")
 }
