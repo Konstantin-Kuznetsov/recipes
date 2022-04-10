@@ -7,7 +7,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.example.recipes.*
 import com.example.recipes.DrawableMatcher.Companion.imageWithDrawableId
-import org.hamcrest.Matchers
+import org.hamcrest.core.AllOf.allOf
 
 class RecipesListScreen {
 
@@ -19,7 +19,7 @@ class RecipesListScreen {
     // click on card with text in descendant view
     fun clickCardWithTextAndFavStatus(text: String, isFavourited: Boolean) =
         onView(recipesList).actionOnItem(
-            Matchers.allOf(
+            allOf(
                 ViewMatchers.hasDescendant(withText(text)),
                 ViewMatchers.hasDescendant(
                     imageWithDrawableId(

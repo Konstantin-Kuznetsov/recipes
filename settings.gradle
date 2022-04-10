@@ -11,4 +11,5 @@ rootProject.name = "recipes"
 include ':app'
 include ':core'
 include ':feed'
+include ':feed_paging'
 include ':details'

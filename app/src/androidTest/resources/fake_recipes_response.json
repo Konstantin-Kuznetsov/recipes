@@ -1,0 +1,44 @@
+[
+  {
+    "calories": "516 kcal",
+    "carbos": "47 g",
+    "description": "Test data, test data, test dataR",
+    "difficulty": 0,
+    "fats": "8 g",
+    "headline": "Test data, test data, test data",
+    "id": "533143aaff604d567f8b4571",
+    "image": "https://image.shutterstock.com/image-photo/bunch-bananas-isolated-on-white-600w-1722111529.jpg",
+    "name": "Banana",
+    "proteins": "43 g",
+    "thumb": "https://image.shutterstock.com/image-photo/bunch-bananas-isolated-on-white-600w-1722111529.jpg",
+    "time": "PT35M"
+  },
+  {
+    "calories": "397 kcal",
+    "carbos": "26 g",
+    "description": "Close your eyes, open up your Ras El Hanout and inhale deeply. You are no longer standing in your kitchen. Around you are the sounds of a bustling market. Robed men sell ornate carpets and a camel nibbles affectionately at your ear.  OK, we\u2019re pretty sure Paul McKenna\u2019s job is safe for now, but get cooking this recipe and take dinnertime on a magic carpet ride to Casablanca! Our tip for this recipe is to take your meat out of the fridge at least 30 minutes before dinner which will allow you to cook it more evenly.",
+    "difficulty": 0,
+    "fats": "5 g",
+    "headline": "Test data, test data, test data",
+    "id": "53314247ff604d44808b4569",
+    "image": "http://images6.fanpop.com/image/photos/34500000/An-Orange-Fruit-called-Orange-colors-34512038-472-310.jpg",
+    "name": "Orange",
+    "proteins": "31 g",
+    "thumb": "http://images6.fanpop.com/image/photos/34500000/An-Orange-Fruit-called-Orange-colors-34512038-472-310.jpg",
+    "time": "PT30M"
+  },
+  {
+    "calories": "458 kcal",
+    "carbos": "29 g",
+    "description": "World-renowned people generally all have one thing in common: a legacy. For Henry Ford it was the motorcar, for Thomas Edison it was the lightbulb. For our intern Simon, it was this lip-smackingly awesome Sea Bream. Taking the warm crunchiness of potatoes against the fresh southern asian flavours of fish with coriander, ginger and lime, it\u2019s the perfect dish for transporting your tastebuds. Don\u2019t let the smell of the fish sauce throw you - add it gradually to your sauce for a really authentic asian spin!",
+    "difficulty": 1,
+    "fats": "6 g",
+    "headline": "Test data, test data, test data",
+    "id": "53314276ff604d28828b456b",
+    "image": "https://fruktlove.ru/wp-content/uploads/2018/08/kivi.jpg",
+    "name": "Kiwi",
+    "proteins": "29 g",
+    "thumb": "https://fruktlove.ru/wp-content/uploads/2018/08/kivi.jpg",
+    "time": "PT35M"
+  }
+]

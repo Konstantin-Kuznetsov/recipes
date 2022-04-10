@@ -2,19 +2,24 @@ package com.example.feed.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.core.data.model.RecipesResult
+import com.example.core.domain.model.RecipeItem
+import com.example.core.domain.model.RecipesPagingSource
 import com.example.feed.domain.RecipesFeedInteractor
 import com.example.feed.presentation.state.RecipesListEffect
 import com.example.feed.presentation.state.RecipesListState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RecipesListViewModel(
-    private val interactor: RecipesFeedInteractor
+@HiltViewModel
+class RecipesListViewModel @Inject constructor(
+    private val interactor: RecipesFeedInteractor, // For "legacy" logic only
+    private val recipesPagingSource: RecipesPagingSource
 ) : ViewModel() {
 
     private val innerState = MutableStateFlow<RecipesListState>(RecipesListState.Loading)
@@ -23,6 +28,10 @@ class RecipesListViewModel(
     private val innerEffects = MutableSharedFlow<RecipesListEffect>(replay = 0)
     val effects: SharedFlow<RecipesListEffect>
         get() = innerEffects
+
+    fun fetchRecipes(): Flow<PagingData<RecipeItem>> =
+        recipesPagingSource.recipesFlow
+            .cachedIn(viewModelScope)
 
     fun loadRecipes(fullscreenLoader: Boolean = false) {
         if (fullscreenLoader) {

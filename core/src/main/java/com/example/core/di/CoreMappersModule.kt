@@ -2,13 +2,16 @@ package com.example.core.di
 
 import com.example.core.data.mapper.RecipeMapper
 import com.example.core.data.mapper.RecipeMapperImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-class CoreMappersModule {
-    @Provides
+@InstallIn(SingletonComponent::class)
+abstract class CoreMappersModule {
+    @Binds
     @Singleton
-    fun provideRecipeMapper(): RecipeMapper = RecipeMapperImpl()
+    abstract fun provideRecipeMapper(impl: RecipeMapperImpl): RecipeMapper
 }

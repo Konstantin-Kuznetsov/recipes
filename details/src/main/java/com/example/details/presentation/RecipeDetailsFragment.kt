@@ -1,44 +1,28 @@
 package com.example.details.presentation
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.example.core.app.RecipesApp
 import com.example.details.R
 import com.example.details.databinding.FragmentRecipeDetailsBinding
-import com.example.details.di.DaggerRecipeDetailsComponent
-import com.example.details.di.RecipeDetailsModule
 import com.example.details.presentation.state.RecipeDetailsEffect
 import com.example.details.presentation.state.RecipeDetailsState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class RecipeDetailsFragment : Fragment(R.layout.fragment_recipe_details) {
 
-    @Inject
-    lateinit var vmFactory: RecipeDetailsModule.RecipeDetailsViewModelFactory
-    private val viewModel by viewModels<RecipeDetailsViewModel> { vmFactory }
+    private val viewModel by viewModels<RecipeDetailsViewModel>()
 
     private val binding: FragmentRecipeDetailsBinding
         get() = requireNotNull(_viewBinding)
 
     private var _viewBinding: FragmentRecipeDetailsBinding? = null
-
-
-    override fun onAttach(context: Context) {
-        DaggerRecipeDetailsComponent
-            .builder()
-            .coreComponent(RecipesApp.coreComponent)
-            .recipeDetailsModule(RecipeDetailsModule())
-            .build()
-            .inject(this)
-        super.onAttach(context)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

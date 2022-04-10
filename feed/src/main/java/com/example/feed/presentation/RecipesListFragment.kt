@@ -1,28 +1,24 @@
 package com.example.feed.presentation
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.core.AppNavigator
-import com.example.core.app.RecipesApp
 import com.example.feed.R
 import com.example.feed.databinding.FragmentRecipesListBinding
-import com.example.feed.di.DaggerRecipesFeedComponent
-import com.example.feed.di.RecipesFeedModule
 import com.example.feed.presentation.state.RecipesListEffect
 import com.example.feed.presentation.state.RecipesListState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
 
-    @Inject
-    lateinit var vmFactory: RecipesFeedModule.RecipesListViewModelFactory
-    private val viewModel by viewModels<RecipesListViewModel> { vmFactory }
+    private val viewModel by viewModels<RecipesListViewModel>()
 
     private val binding: FragmentRecipesListBinding
         get() = requireNotNull(_viewBinding)
@@ -30,26 +26,18 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     private var _viewBinding: FragmentRecipesListBinding? = null
 
     private val recipesAdapter by lazy {
-        RecipesListAdapter(
+        RecipesListPagingAdapter(
             ::onRecipeItemClick,
             viewModel::onFavouriteIconClick
         )
     }
 
-    override fun onAttach(context: Context) {
-        DaggerRecipesFeedComponent
-            .builder()
-            .coreComponent(RecipesApp.coreComponent)
-            .recipesFeedModule(RecipesFeedModule())
-            .build()
-            .inject(this)
-        super.onAttach(context)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launch {
-            viewModel.loadRecipes()
+            viewModel.fetchRecipes().collectLatest { pagingData ->
+                recipesAdapter.submitData(pagingData)
+            }
         }
     }
 
@@ -92,7 +80,8 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
             is RecipesListState.Data -> {
                 // todo
                 binding.srlRecipesList.isRefreshing = false
-                recipesAdapter.updateRecipesData(state.screenState.recipes)
+                // adapter without paging here
+                //recipesAdapter.updateRecipesData(state.screenState.recipes)
             }
             is RecipesListState.Error -> {
                 // todo
